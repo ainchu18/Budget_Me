@@ -12,7 +12,15 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('salary_budget')
 
-expenses = SHEET.worksheet('expenses')
+def get_salary_data():
+    """
+    Get users monthly salary.
+    """
+    print("Please enter your monthly salary.")
+    print("This should be a number with no decimal point.")
+    print("Example: 1000,2000,3000,4000\n")
 
-bills = expenses.get_all_values()
-print(bills)
+    monthly_salary = input("Enter your salary here:\n")
+    print(f"Your salary this month is {monthly_salary}")
+
+get_salary_data()
