@@ -16,14 +16,20 @@ def get_monthly_data():
     """
     Get users monthly salary and expenses.
     """
-    print("Please enter your monthly salary.")
-    print("This should 4 numbers separated by commas. Write salary first, rent second, food third, extras fourth.")
-    print("Example: 4000,550,200,100\n")
+    while True:
+        print("Please enter your monthly salary and expenses.")
+        print("This should be 4 numbers separated by commas. Write salary first, rent second, food third, extras fourth.")
+        print("Example: 4000,550,200,100\n")
 
-    monthly_salary_expenses = input("Enter your salary here:\n")
+        monthly_salary_expenses = input("Enter your monthly salary and expenses here:\n")
 
-    salary_expenses_data = monthly_salary_expenses.split(",")
-    validate_figures(salary_expenses_data)
+        salary_expenses_data = monthly_salary_expenses.split(",")
+    
+        if validate_figures(salary_expenses_data):
+            print("Values entered are valid!")
+            break
+    
+    return salary_expenses_data
 
 def validate_figures(values):
     """
@@ -39,5 +45,8 @@ def validate_figures(values):
             )
     except ValueError as e:
         print(f"Incorrect data! {e}, please try again.\n")
+        return False
 
-get_monthly_data()
+    return True
+
+monthly_data = get_monthly_data()
