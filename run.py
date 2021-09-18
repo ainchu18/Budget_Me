@@ -26,7 +26,7 @@ def get_monthly_data():
         salary_expenses_data = monthly_salary_expenses.split(",")
     
         if validate_figures(salary_expenses_data):
-            print("Values entered are valid!")
+            print("Values entered are valid!\n")
             break
     
     return salary_expenses_data
@@ -49,4 +49,16 @@ def validate_figures(values):
 
     return True
 
+def update_salary_expenses_worksheet(monthly_data):
+    """
+    This function updates the monthly salary and expenses worksheet.
+    Add new row with the list data provided by the user.
+    """
+    print("Updating salary expenses worksheet... Please stand by!\n")
+    salary_expenses_worksheet = SHEET.worksheet("salary_expenses")
+    salary_expenses_worksheet.append_row(monthly_data)
+    print("Salary expenses worksheet updated successfully!\n")
+
 monthly_data = get_monthly_data()
+salary_expenses_data = [int(num) for num in monthly_data]
+update_salary_expenses_worksheet(salary_expenses_data)
