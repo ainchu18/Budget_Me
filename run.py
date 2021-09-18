@@ -12,15 +12,31 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('salary_budget')
 
-def get_salary_data():
+def get_monthly_data():
     """
-    Get users monthly salary.
+    Get users monthly salary and expenses.
     """
     print("Please enter your monthly salary.")
-    print("This should be a number with no decimal point.")
-    print("Example: 1000,2000,3000,4000\n")
+    print("This should 4 numbers separated by commas. Write salary first, rent second, food third, extras fourth.")
+    print("Example: 4000,550,200,100\n")
 
-    monthly_salary = input("Enter your salary here:\n")
-    print(f"Your salary this month is {monthly_salary}")
+    monthly_salary_expenses = input("Enter your salary here:\n")
 
-get_salary_data()
+    salary_expenses_data = monthly_salary_expenses.split(",")
+    validate_figures(salary_expenses_data)
+
+def validate_figures(values):
+    """
+    This function will convert all strings to integeres.
+    Raises a ValueError if the string cannot be converted to integer,
+    or if there are not exactly 4 values entered by the user.
+    """
+    try:
+        if len(values) != 4:
+            raise ValueError(
+                f"You need to enter exactly 4 values, you entered {len(values)}"
+            )
+    except ValueError as e:
+        print(f"Incorrect data! {e}, please try again.\n")
+
+get_monthly_data()
