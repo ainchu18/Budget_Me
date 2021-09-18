@@ -32,6 +32,7 @@ def validate_figures(values):
     or if there are not exactly 4 values entered by the user.
     """
     try:
+        [int(value) for value in values]
         if len(values) != 4:
             raise ValueError(
                 f"You need to enter exactly 4 values, you entered {len(values)}"
